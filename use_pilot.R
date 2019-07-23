@@ -3,18 +3,6 @@
 library(tidyverse)
 library(likert)
 library(psych)
-# library(gridExtra)
-# library(kableExtra)
-# library(jpeg)
-# library(png)
-# library(grid)
-
-# Strongly disagree - 1
-# Disagree - 2
-# Neither Agree nor Disagree - 3
-# Agree - 4
-# Strongly Agree - 5		
-
 
 # import three questionnaire sections		
 navigation <- read.csv("data/Learn Feedback Form - navigation.csv", stringsAsFactors = FALSE)
