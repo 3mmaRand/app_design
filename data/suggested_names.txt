@@ -1,0 +1,30 @@
+sugg_name/categorisations
+Rap/personaX
+Learn R-apidly/learn, quick
+Pocket R/simple
+leaRn/learn
+HelpeR/teach
+easyR/simple
+TeachR/teach  
+ProgramR/outcome
+Riddle/fun
+grrrrrrR/unclassified 
+staR/personaX
+lab-R-tory/personaX
+Rapper/personaX
+AdventR ("adventure")/fun
+InventR/personaX
+Dat->R/outcome
+R-ccelerator/quick
+R-beginners assistant/teach, learn
+Making R clear and simple for all/simple, teach
+R-chitect/personaX
+R-pool/other
+R-right/unclassified
+Quick TrainR/quick, teach
+Stats TrainR/outcome, teach 
+Stats PlayR/outcome, fun 
+RUOK/teach
+leaRn/learn 
+leaRn/learn
+LearnR/learn
