@@ -4,8 +4,8 @@ author: "Emma Rand"
 date: "25/07/2019"
 output:
   word_document: default
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -40,6 +40,7 @@ categ <- read.table("data/suggested_names.txt",
 There were 39 respondents with an approximately 1:1:0 male: female:non-binary gender ratio which compares to ## 88:139:x for the cohort.  A total of 29 suggestions for App names were received and these were classified as expressing one or more of a set of X ideas concerned with outcomes for the user, the user experience, another app persona not related to either of those or left unclassified. See table 1
 
 **Supplementary material**
+
 ```{r received-categ}
 names(categ) <- c("Name suggested", "Categorisations")
 categ %>% flextable() %>% 
@@ -50,20 +51,26 @@ categ %>% flextable() %>%
 ```
 
 
+<br>
+<br>
+<br>
+**Figure for inclusion**
 
+```{r categ-import}
 
+cat_list <- read.table("data/suggested_names_categlist.txt", 
+                       sep = "\n",
+                       header = TRUE,
+                       stringsAsFactors = FALSE)
+```
 
-```{r}
-# 
-# names <- read.table("data/suggested_names.txt", sep = "\n", stringsAsFactors = FALSE)
-# names(names) <- "responses"
-# df <- data.frame(table(names))
-# wordcloud(words = df$names,
-#           freq = df$Freq, 
-#           min.freq = 1,
-#           random.order = FALSE,
-#           rot.per = 0.35, 
-#           colors = brewer.pal(4, "Dark2"))
+```{r categ-fig,fig.cap="Frequency of categories for suggested App names"}
+ggplot(data = cat_list, aes(x = fct_infreq(categorisations))) +
+  geom_bar(col = "black", fill = "lightgreen") +
+  xlab("Categorisation") +
+  ylab("Count") +
+  theme_classic()
+
 
 ```
 
