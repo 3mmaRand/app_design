@@ -3,8 +3,8 @@ title: "App names suggested by Stage 2 students"
 author: "Emma Rand"
 date: "25/07/2019"
 output:
-  pdf_document: default
   word_document: default
+  pdf_document: default
   html_document: default
 ---
 

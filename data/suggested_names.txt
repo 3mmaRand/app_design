@@ -19,7 +19,7 @@ R-ccelerator/quick
 R-beginners assistant/teach, learn
 Making R clear and simple for all/simple, teach
 R-chitect/personaX
-R-pool/other
+R-pool/unclassified
 R-right/unclassified
 Quick TrainR/quick, teach
 Stats TrainR/outcome, teach 
