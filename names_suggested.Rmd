@@ -4,8 +4,8 @@ author: "Emma Rand"
 date: "25/07/2019"
 output:
   word_document: default
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -64,10 +64,10 @@ cat_list <- read.table("data/suggested_names_categlist.txt",
                        stringsAsFactors = FALSE)
 ```
 
-```{r categ-fig,fig.cap="Frequency of categories for suggested App names"}
+```{r categ-fig,fig.cap="Frequency of classification terms for suggested App names. A suggested name had one or more terms assoicated with it or was left unclassified."}
 ggplot(data = cat_list, aes(x = fct_infreq(categorisations))) +
   geom_bar(col = "black", fill = "lightgreen") +
-  xlab("Categorisation") +
+  xlab("Classification Terms") +
   ylab("Count") +
   theme_classic()
 

@@ -1,14 +1,14 @@
 sugg_name/categorisations
 Rap/personaX
 Learn R-apidly/learn, quick
-Pocket R/simple
+Pocket R/simple, quick
 leaRn/learn
 HelpeR/teach
 easyR/simple
-TeachR/teach  
+TeachR/teach
 ProgramR/outcome
 Riddle/fun
-grrrrrrR/unclassified 
+grrrrrrR/unclassified
 staR/personaX
 lab-R-tory/personaX
 Rapper/personaX
@@ -22,9 +22,9 @@ R-chitect/personaX
 R-pool/unclassified
 R-right/unclassified
 Quick TrainR/quick, teach
-Stats TrainR/outcome, teach 
-Stats PlayR/outcome, fun 
+Stats TrainR/outcome, teach
+Stats PlayR/outcome, fun
 RUOK/teach
-leaRn/learn 
+leaRn/learn
 leaRn/learn
 LearnR/learn
