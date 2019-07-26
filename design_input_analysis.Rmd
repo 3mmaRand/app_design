@@ -1,0 +1,259 @@
+---
+title: "Design input: Suggested names, focus group and prototype evaluation"
+author: "Emma Rand"
+date: "25/07/2019"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+```{r pkgs}
+library("kableExtra")
+library("knitr")
+library("flextable")
+library("tidyverse")
+library("wordcloud")
+library("RColorBrewer")
+library("likert")
+library("psych")
+library("grid")
+library("gridExtra")
+```
+
+
+# Methods
+## Call for focus group participants.
+A call for participants to take part in a focus group was sent in the first week of the Autumn term 2018 to stage 2 students. This cohort of students had taken Data Analysis in R in the Spring term 2018, during their first year. Respondents were also able to suggest a name for the app, ask a question or make a comment.
+
+```{r received-import}
+categ <- read.table("data/suggested_names.txt",
+                    sep = "/", 
+                    header = TRUE,
+                    stringsAsFactors = FALSE)
+```
+
+## Focus group
+The focus group was held over 90 mins. Three main questions were addressed:
+
+1. In learning R, what things were most confusing or caused most difficulty right at the start?
+2. How should topics be defined and organised?
+3. What level of advertising is acceptable?
+
+Participants were divided into three groups and considered one question at a time, recording their discussion on paper provided then moving on to the next question. This was followed by a moderated discussion amongst the whole group based on sharing the comments made by the smaller groups.
+
+## Evaluation of the Prototype
+Prototype evaluation was designed and carried out by two student members of the LDT during a scheduled Data Analysis in R workshop . Workshop participants were asked to spend 10 - 15 minutes using the prototype and respond to sixteen Likert questions. These concerned Ease of navigation, Content or Aesthetic appeal.
+
+# Results
+## Response to the call for focus group participants.
+There were 39 respondents with an approximately 1:1:0 male: female:non-binary gender ratio which compares to ## 88:139:x for the cohort.  A total of 29 suggestions for App names were received and these were classified as expressing one or more of a set of X ideas concerned with outcomes for the user, the user experience, another app persona not related to either of those or left unclassified. See table 1
+
+**Supplementary material**
+
+```{r received-categ}
+names(categ) <- c("Name suggested", "Categorisations")
+categ %>% flextable() %>% 
+  width(width = 2) %>% 
+  fontsize(size = 9, part = "all",) %>% 
+  add_header_lines("Table 1. Suggestions for the name of the App received through the call for focus-group participation") 
+
+```
+
+
+<br>
+<br>
+<br>
+**Figure for inclusion**
+
+```{r categ-import}
+
+cat_list <- read.table("data/suggested_names_categlist.txt", 
+                       sep = "\n",
+                       header = TRUE,
+                       stringsAsFactors = FALSE)
+```
+
+```{r categ-fig,fig.cap="Frequency of classification terms for suggested App names. A suggested name had one or more terms assoicated with it or was left unclassified."}
+ggplot(data = cat_list, aes(x = fct_infreq(categorisations))) +
+  geom_bar(col = "black", fill = "lightgreen") +
+  xlab("Classification Terms") +
+  ylab("Count") +
+  theme_classic()
+
+
+```
+
+## Focus group
+
+to be completed
+
+## Evaluation of the Prototype
+
+```{r import}
+# import three questionnaire sections		
+navigation <- read.csv("data/Learn Feedback Form - navigation.csv", stringsAsFactors = FALSE)
+content <- read.csv("data/Learn Feedback Form - content.csv")
+aesthetics <- read.csv("data/Learn Feedback Form - aesthetics.csv")
+```
+
+
+```{r navigation-tidy}
+# navigation
+# reorder factor levels and rename q's
+navigation <- navigation %>% 
+  mutate("It was easy to locate the lesson" = factor(It.was.easy.to.locate.the.lesson, 
+                                                     levels = c("Strongly\ndisagree",
+                                                                "Disagree",
+                                                                "Neither agree\nnor Disagree",
+                                                                "Agree",
+                                                                "Strongly\nagree")),
+         "The menus were readable" = factor(The.menus.were.readable, 
+                                                     levels = c("Strongly\ndisagree",
+                                                                "Disagree",
+                                                                "Neither agree\nnor Disagree",
+                                                                "Agree",
+                                                                "Strongly\nagree")),
+         "I always knew where I was in the app" = factor(I.always.knew.where.I.was.in.the.app, 
+                                                     levels = c("Strongly\ndisagree",
+                                                                "Disagree",
+                                                                "Neither agree\nnor Disagree",
+                                                                "Agree",
+                                                                "Strongly\nagree")),
+         "I had difficulty locating the lesson" = factor(I.had.difficulty.locating.the.lesson, 
+                                                     levels = c("Strongly\ndisagree",
+                                                                "Disagree",
+                                                                "Neither agree\nnor Disagree",
+                                                                "Agree",
+                                                                "Strongly\nagree")),
+         "Navigation was intuitive" = factor(Navigation.was.intuitive, 
+                                                         levels = c("Strongly\ndisagree",
+                                                                    "Disagree",
+                                                                    "Neither agree\nnor Disagree",
+                                                                    "Agree",
+                                                                    "Strongly\nagree")))
+
+```
+
+```{r navigation-fig}
+navlik <- likert(navigation[7:11])
+navplot <- plot(navlik,
+              legend.position = "top",
+              legend = "",
+              text.size = 3,
+              low.color = "lightblue",
+              high.col = "lightgreen")
+
+```
+
+```{r content-tidy}
+content <- content %>% 
+  mutate("I feel like the content was well paced" = factor(I.feel.like.the.content.was.well.paced, 
+                                                     levels = c("Strongly\ndisagree",
+                                                                "Disagree",
+                                                                "Neither agree\nnor Disagree",
+                                                                "Agree",
+                                                                "Strongly\nagree")),
+         "I found it difficult to keep pace with the content" = factor(I.found.it.difficult.to.keep.pace.with.the.content, 
+                                            levels = c("Strongly\ndisagree",
+                                                       "Disagree",
+                                                       "Neither agree\nnor Disagree",
+                                                       "Agree",
+                                                       "Strongly\nagree")),
+         "The content was too easy" = factor(The.content.was.too.easy, 
+                                                         levels = c("Strongly\ndisagree",
+                                                                    "Disagree",
+                                                                    "Neither agree\nnor Disagree",
+                                                                    "Agree",
+                                                                    "Strongly\nagree")),
+         "The content was too hard" = factor(The.content.was.too.hard, 
+                                                         levels = c("Strongly\ndisagree",
+                                                                    "Disagree",
+                                                                    "Neither agree\nnor Disagree",
+                                                                    "Agree",
+                                                                    "Strongly\nagree")),
+         "I enjoyed the content" = factor(I.enjoyed.the.content, 
+                                             levels = c("Strongly\ndisagree",
+                                                        "Disagree",
+                                                        "Neither agree\nnor Disagree",
+                                                        "Agree",
+                                                        "Strongly\nagree")),
+         "I did not feel engaged with the content" = factor(I.did.not.feel.engaged.with.the.content, 
+                                          levels = c("Strongly\ndisagree",
+                                                     "Disagree",
+                                                     "Neither agree\nnor Disagree",
+                                                     "Agree",
+                                                     "Strongly\nagree")))
+
+```
+
+```{r content-fig}
+contlik <- likert(content[8:13])
+contplot <- plot(contlik,
+                legend.position = "top",
+                legend = "",
+                text.size = 3,
+                low.color = "lightblue",
+                high.col = "lightgreen")
+
+```
+
+```{r aes-content}
+# reorder factor levels and rename q's
+aesthetics <- aesthetics %>% 
+  mutate("I thought the app was pretty" = factor(I.thought.the.app.was.pretty, 
+                                                     levels = c("Strongly\ndisagree",
+                                                                "Disagree",
+                                                                "Neither agree\nnor Disagree",
+                                                                "Agree",
+                                                                "Strongly\nagree")),
+         "The app was too cluttered " = factor(The.app.was.too.cluttered, 
+                                            levels = c("Strongly\ndisagree",
+                                                       "Disagree",
+                                                       "Neither agree\nnor Disagree",
+                                                       "Agree",
+                                                       "Strongly\nagree")),
+         "The app's design was distracting" = factor(The.app.s.design.was.distracting, 
+                                                         levels = c("Strongly\ndisagree",
+                                                                    "Disagree",
+                                                                    "Neither agree\nnor Disagree",
+                                                                    "Agree",
+                                                                    "Strongly\nagree")),
+         "The app was too bare" = factor(The.app.was.too.bare, 
+                                                         levels = c("Strongly\ndisagree",
+                                                                    "Disagree",
+                                                                    "Neither agree\nnor Disagree",
+                                                                    "Agree",
+                                                                    "Strongly\nagree")),
+         "I thought the app looked cool" = factor(I.thought.the.app.looked.cool, 
+                                             levels = c("Strongly\ndisagree",
+                                                        "Disagree",
+                                                        "Neither agree\nnor Disagree",
+                                                        "Agree",
+                                                        "Strongly\nagree")))
+
+```
+
+```{r aes-fig}
+
+aeslik <- likert(aesthetics[8:12])
+aesplot <- plot(aeslik,
+                legend.position = "top",
+                legend = "",
+                text.size = 3,
+                low.color = "lightblue",
+                high.col = "lightgreen")
+
+```
+
+```{r eval-fig, fig.cap="Evaluation of the App Prototype for ease of navigation, content and aesthetics", fig.height=6.5}
+
+grid.arrange(navplot, contplot, aesplot)
+
+```
